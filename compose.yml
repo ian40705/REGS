@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  regs-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: regs-api
+    ports:
+      - "18081:8080"
+    volumes:
+      # 1. 🔑 控制外層 Docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+      # 2. 💡 跨平台最核心：將 Windows 宿主機的「專案根目錄」直接映射到容器內的相同 Linux 虛擬路徑
+      # 這樣不論是 114-framework、uploads 還是暫存區，容器內外路徑完全 1:1 鏡像對齊！
+      - .:/workspace
+      
+    environment:
+      - ENV=production
+      - PORT=8080
+      
+      # 3. 🎯 告訴 Go 後端，主機上的實體錨點就在 /workspace
+      # 這樣不論是解壓正常的 submit.zip 還是失敗注入的 bad.zip，外層 Docker 都能在主機的 ./ 找到對應檔案！
+      - HOST_PROJECT_PATH=/workspace
+      
+    restart: always
