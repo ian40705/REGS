@@ -1,0 +1,75 @@
+=== start judge ===
+cases: 5, max: 20
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Collect source files
+-- Add : /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/online-judge/case1.h
+-- To /tmp/regs-build-ywKRHz/case/_1_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/online-judge/case2.h
+-- To /tmp/regs-build-ywKRHz/case/_2_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/online-judge/case3.h
+-- To /tmp/regs-build-ywKRHz/case/_3_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/online-judge/case4.h
+-- To /tmp/regs-build-ywKRHz/case/_4_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/online-judge/case5.h
+-- To /tmp/regs-build-ywKRHz/case/_5_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '7a4ea57152ab13e23c7297d1c09f686403cfbd4fdc0e13b0fd9ea39b00c0a17e'
+--  case2 '04dee48a4b7dda54871838a02d6be5368b99612f56ec6934ea29750f523584ed'
+--  case3 'a586e81dfe09b8ac30c10ced3a1200ce8ebaaefa31a848756f8cd4159ba0f0ab'
+--  case4 '58abff58ee40578026d7fd0719e442151ecc23419469dd0189d092058c934dcb'
+--  case5 'b9ef9039453a81025c44036cabda7ea1fa2d97c315b41ead7071bec526b5f3ee'
+-- Configuring done (2.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/regs-build-ywKRHz
+[1/10] Building CXX object CMakeFiles/case1.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/entrypoint.cpp.o
+[2/10] Building CXX object CMakeFiles/case2.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/entrypoint.cpp.o
+[3/10] Building CXX object CMakeFiles/case3.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/entrypoint.cpp.o
+[4/10] Linking CXX executable case1
+[5/10] Building CXX object CMakeFiles/case4.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/entrypoint.cpp.o
+[6/10] Linking CXX executable case2
+[7/10] Linking CXX executable case3
+[8/10] Linking CXX executable case4
+[9/10] Building CXX object CMakeFiles/case5.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ006/solution/entrypoint.cpp.o
+[10/10] Linking CXX executable case5
+case1 2/2 (AC)
+case2 2/2 (AC)
+case3 4/4 (AC)
+case4 4/4 (AC)
+case5 8/8 (AC)

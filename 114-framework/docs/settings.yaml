@@ -1,0 +1,174 @@
+Version: 0.0.1
+Type: 1
+Title: Stream Pipe
+Description: Read The Docs
+InputDescription: Read The Docs
+OutputDescription: Read The Docs
+SampleInput: Read The case*.h
+SampleOutput: Read The case*.h
+Hint: ""
+InterceptionRuleServiceDataId: settings.json
+Password: null
+Status: 0
+TestDatas:
+  - TotalTimeLimit: 1000
+    CputimeLimit: 1000
+    MemoryLimit: 536870912
+    Score: 2
+    Status: 0
+    Operations:
+      - Language: 0
+        Type: 2
+        Filename: entrypoint.cpp
+        FileServiceDataId: template/entrypoint.cpp
+      - Language: 0
+        Type: 2
+        Filename: test.h
+        FileServiceDataId: template/test.h
+      - Language: 0
+        Type: 2
+        Filename: case.h
+        FileServiceDataId: online-judge/case1.h
+    Outputs:
+      - Filename: case1
+        Type: 2
+        ComparerMode: 1
+        StringComparerOption: 3
+        FileServiceDataId: online-judge/case1
+  - TotalTimeLimit: 1000
+    CputimeLimit: 1000
+    MemoryLimit: 536870912
+    Score: 2
+    Status: 0
+    Operations:
+      - Language: 0
+        Type: 2
+        Filename: entrypoint.cpp
+        FileServiceDataId: template/entrypoint.cpp
+      - Language: 0
+        Type: 2
+        Filename: test.h
+        FileServiceDataId: template/test.h
+      - Language: 0
+        Type: 2
+        Filename: case.h
+        FileServiceDataId: online-judge/case2.h
+    Outputs:
+      - Filename: case2
+        Type: 2
+        ComparerMode: 1
+        StringComparerOption: 3
+        FileServiceDataId: online-judge/case2
+  - TotalTimeLimit: 1000
+    CputimeLimit: 1000
+    MemoryLimit: 536870912
+    Score: 4
+    Status: 0
+    Operations:
+      - Language: 0
+        Type: 2
+        Filename: entrypoint.cpp
+        FileServiceDataId: template/entrypoint.cpp
+      - Language: 0
+        Type: 2
+        Filename: test.h
+        FileServiceDataId: template/test.h
+      - Language: 0
+        Type: 2
+        Filename: case.h
+        FileServiceDataId: online-judge/case3.h
+    Outputs:
+      - Filename: case3
+        Type: 2
+        ComparerMode: 1
+        StringComparerOption: 3
+        FileServiceDataId: online-judge/case3
+  - TotalTimeLimit: 1000
+    CputimeLimit: 1000
+    MemoryLimit: 536870912
+    Score: 4
+    Status: 0
+    Operations:
+      - Language: 0
+        Type: 2
+        Filename: entrypoint.cpp
+        FileServiceDataId: template/entrypoint.cpp
+      - Language: 0
+        Type: 2
+        Filename: test.h
+        FileServiceDataId: template/test.h
+      - Language: 0
+        Type: 2
+        Filename: case.h
+        FileServiceDataId: online-judge/case4.h
+    Outputs:
+      - Filename: case4
+        Type: 2
+        ComparerMode: 1
+        StringComparerOption: 3
+        FileServiceDataId: online-judge/case4
+  - TotalTimeLimit: 1000
+    CputimeLimit: 1000
+    MemoryLimit: 536870912
+    Score: 8
+    Status: 0
+    Operations:
+      - Language: 0
+        Type: 2
+        Filename: entrypoint.cpp
+        FileServiceDataId: template/entrypoint.cpp
+      - Language: 0
+        Type: 2
+        Filename: test.h
+        FileServiceDataId: template/test.h
+      - Language: 0
+        Type: 2
+        Filename: case.h
+        FileServiceDataId: online-judge/case5.h
+    Outputs:
+      - Filename: case5
+        Type: 2
+        ComparerMode: 1
+        StringComparerOption: 3
+        FileServiceDataId: online-judge/case5
+TemplateResources:
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: entrypoint.cpp
+    FileServiceDataId: template/entrypoint.cpp
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: test.h
+    FileServiceDataId: template/test.h
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: media_pipe.h
+    FileServiceDataId: template/media_pipe.h
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: media_type.h
+    FileServiceDataId: template/media_type.h
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: case.h
+    FileServiceDataId: spec/case.h
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: case1.h
+    FileServiceDataId: spec/case1.h
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: case2.h
+    FileServiceDataId: spec/case4.h
+  - Language: 0
+    IDE: 0
+    Type: 1
+    Filename: README.pdf
+    FileServiceDataId: README.pdf

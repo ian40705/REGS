@@ -1,0 +1,492 @@
+[07:34:08] === STEP A: CMake Configure ===
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (1.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:35:11] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:35:24] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:35:36] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:35:59] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:37:03] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:37:22] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:37:29] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:37:38] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功
+[07:38:10] === STEP A: CMake Configure ===
+Collect source files
+-- Add : /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case1.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_1_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case2.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_2_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case3.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_3_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case4.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_4_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /data/114-framework/114FinalQ001/spec/case5.h
+-- To /data/114-framework/114FinalQ001/solution/build/case/_5_/case.h
+-- Add include: /data/114-framework/114FinalQ001/solution
+-- Add include: /data/114-framework/114FinalQ001/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '00732b91df295f086c953e61553af304bc49f2ec228d452383bbe74c4aa11180'
+--  case2 '462731f864774ec96589a878be3f1efba4caa3f3f40976e7152456c399a39527'
+--  case3 'f7f97cf3705730398241e86eb5ca592bcbe8553dbaf8a3622ddc7f0e0edc7b08'
+--  case4 'c3396dbc91d6f861d4a826ec3dbc1740a743f6d0c22a0522bea1769397ca470d'
+--  case5 'e6c6884cb4e9d9037872c152fefbff9965d73cc03ddb4d3ce552aab7a793048a'
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/114-framework/114FinalQ001/solution/build
+[OK] CMake configure 成功

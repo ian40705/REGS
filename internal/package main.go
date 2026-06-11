@@ -19,7 +19,6 @@ func main() {
 	pubPath := filepath.Join(keysDir, "public.pem")
 
 	// Skip if keys already exist
-	// should exist!
 	if fileExists(privPath) && fileExists(pubPath) {
 		fmt.Println("✅ 金鑰已存在，跳過生成。")
 		return

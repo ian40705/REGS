@@ -1,145 +1,174 @@
 #!/bin/bash
 # =============================================================
-# judge.sh — REGS 自動評測管線
-# 用法：bash judge.sh <專案目錄> <測資輸入檔> <標準答案檔> [時間限制秒數]
-#
-# 回傳值（stdout 最後一行）：
-#   SE  → Setup Error     (CMake configure 失敗)
-#   CE  → Compile Error   (編譯失敗)
-#   TLE → Time Limit Exceeded
-#   RE  → Runtime Error   (非 0 結束碼)
-#   WA  → Wrong Answer
-#   AC  → Accepted
+# judge.sh (fixed: cmake mode + PA→WA alignment)
 # =============================================================
 
-# ── 參數 ──────────────────────────────────────────────────────
-PROJECT_DIR="$1"          # 解壓縮後的學生專案根目錄
-INPUT_FILE="$2"           # 測資輸入（絕對路徑）
-ANSWER_FILE="$3"          # 標準答案（絕對路徑）
-TIME_LIMIT="${4:-5}"      # 時間限制（秒），預設 5 秒
+STUDENT_DIR="$1"
+TEMPLATE_DIR="$2"
+MODE_OR_SCORES="$3"
+TIME_LIMIT="${4:-5}"
 
-# Windows 路徑在 bash / Git Bash 下常會被視為逸出字串；
-# 先把所有反斜線替換成正斜線，避免 `C:\Users\...` 變成無效路徑。
-PROJECT_DIR="${PROJECT_DIR//\\//}"
-INPUT_FILE="${INPUT_FILE//\\//}"
-ANSWER_FILE="${ANSWER_FILE//\\//}"
-
-# 若環境提供 cygpath，也可再做一次轉換，作為補強。
-if command -v cygpath >/dev/null 2>&1; then
-    PROJECT_DIR="$(cygpath -u "$PROJECT_DIR" 2>/dev/null || printf '%s' "$PROJECT_DIR")"
-    INPUT_FILE="$(cygpath -u "$INPUT_FILE" 2>/dev/null || printf '%s' "$INPUT_FILE")"
-    ANSWER_FILE="$(cygpath -u "$ANSWER_FILE" 2>/dev/null || printf '%s' "$ANSWER_FILE")"
-fi
-
-# ── 基本驗證 ─────────────────────────────────────────────────
-if [ -z "$PROJECT_DIR" ] || [ -z "$INPUT_FILE" ] || [ -z "$ANSWER_FILE" ]; then
-    echo "用法: $0 <project_dir> <input_file> <answer_file> [time_limit]" >&2
+# ── 基本驗證 ─────────────────────────────
+if [ -z "$STUDENT_DIR" ] || [ -z "$TEMPLATE_DIR" ] || [ -z "$MODE_OR_SCORES" ]; then
+    echo "用法: $0 <student_dir> <template_dir> <scores_file|cmake> [time_limit]"
     exit 2
 fi
 
-if [ ! -d "$PROJECT_DIR" ]; then
-    echo "錯誤：專案目錄不存在: $PROJECT_DIR" >&2
+[ ! -d "$STUDENT_DIR" ] && { echo "[ERROR] student_dir not found"; exit 1; }
+[ ! -d "$TEMPLATE_DIR" ] && { echo "[ERROR] template_dir not found"; exit 1; }
+
+# ── cmake mode: auto-generate scores.txt from settings.yaml ──
+if [ "$MODE_OR_SCORES" = "cmake" ] || [ "$MODE_OR_SCORES" = "catch2" ]; then
+    PROBLEM_ROOT_TMP="$(cd "$TEMPLATE_DIR/.." && pwd)"
+    SETTINGS_YAML="$PROBLEM_ROOT_TMP/settings.yaml"
+    SCORES_FILE="$(mktemp /tmp/scores-XXXXXX.txt)"
+    _CLEANUP_SCORES=1
+
+    OJ_TMP="$PROBLEM_ROOT_TMP/online-judge"
+    if [ -f "$SETTINGS_YAML" ] && [ -d "$OJ_TMP" ]; then
+        # Get case names (files without .h/.xml extension) from online-judge, sorted
+        CASES=()
+        while IFS= read -r f; do
+            CASES+=("$(basename "$f")")
+        done < <(find "$OJ_TMP" -maxdepth 1 -type f ! -name "*.h" ! -name "*.xml" | sort -V)
+
+        # Get scores from settings.yaml (score: N lines in order)
+        mapfile -t SCORES_LIST < <(grep -oP '(?<=score:\s)\d+' "$SETTINGS_YAML")
+
+        for i in "${!CASES[@]}"; do
+            SCORE="${SCORES_LIST[$i]:-10}"
+            echo "${CASES[$i]} $SCORE" >> "$SCORES_FILE"
+        done
+    fi
+
+    # Fallback: scan online-judge for case files with score 10 each
+    if [ ! -s "$SCORES_FILE" ] && [ -d "$OJ_TMP" ]; then
+        find "$OJ_TMP" -maxdepth 1 -type f ! -name "*.h" ! -name "*.xml" | sort -V | while read -r f; do
+            echo "$(basename "$f") 10" >> "$SCORES_FILE"
+        done
+    fi
+
+    # If still nothing, SE
+    if [ ! -s "$SCORES_FILE" ]; then
+        echo "[ERROR] could not derive scores from problem"
+        rm -f "$SCORES_FILE"
+        echo "SE"
+        exit 1
+    fi
+else
+    SCORES_FILE="$MODE_OR_SCORES"
+    _CLEANUP_SCORES=0
+    [ ! -f "$SCORES_FILE" ] && { echo "[ERROR] scores_file not found"; exit 1; }
+fi
+
+PROBLEM_ROOT="$(cd "$TEMPLATE_DIR/.." && pwd)"
+OJ_DIR="$PROBLEM_ROOT/online-judge"
+
+[ ! -d "$OJ_DIR" ] && { echo "[ERROR] online-judge missing"; exit 1; }
+
+# ── logs ─────────────────────────────
+LOG_DIR="$STUDENT_DIR"
+OUTPUT_LOG="$LOG_DIR/output.log"
+
+# ── 讀 scores.txt（修正：只取數字） ─────────────────────────────
+declare -a CASE_NAMES
+declare -A CASE_SCORES
+
+MAX_SCORE=0
+
+while read -r case_name score; do
+    [ -z "$case_name" ] && continue
+
+    # 去掉 comment / 非數字
+    score="${score%%#*}"
+    score="$(echo "$score" | grep -oE '[0-9]+')"
+
+    CASE_NAMES+=("$case_name")
+    CASE_SCORES["$case_name"]="$score"
+
+    MAX_SCORE=$((MAX_SCORE + score))
+done < "$SCORES_FILE"
+
+# Cleanup temp scores file if we created it
+[ "${_CLEANUP_SCORES:-0}" = "1" ] && rm -f "$SCORES_FILE"
+
+TOTAL_SCORE=0
+
+echo "=== start judge ===" >> "$OUTPUT_LOG"
+echo "cases: ${#CASE_NAMES[@]}, max: $MAX_SCORE" >> "$OUTPUT_LOG"
+
+# ── build dir ─────────────────────────────
+BUILD_DIR="$(mktemp -d /tmp/regs-build-XXXXXX)"
+
+# ── cmake configure ─────────────────────────────
+cmake -G Ninja \
+    -S "$TEMPLATE_DIR" \
+    -B "$BUILD_DIR" \
+    -D SOURCE_DIR="$STUDENT_DIR" \
+    -D SPEC_DIR="$OJ_DIR" \
+    >> "$OUTPUT_LOG" 2>&1
+
+if [ $? -ne 0 ]; then
     echo "SE"
     exit 1
 fi
 
-# ── 切換到專案目錄 ────────────────────────────────────────────
-cd "$PROJECT_DIR" || { echo "SE"; exit 1; }
+# ── build ─────────────────────────────
+cmake --build "$BUILD_DIR" --parallel 2 >> "$OUTPUT_LOG" 2>&1
 
-# Log 檔放在專案目錄下（worker.py 之後會把它們搬到 logs/<op_id>/）
-LOG_DIR="."
-CONFIGURE_LOG="$LOG_DIR/configure.log"
-COMPILE_LOG="$LOG_DIR/compile.log"
-OUTPUT_LOG="$LOG_DIR/output.log"       # 執行過程的 log 訊息
-USER_OUTPUT="$LOG_DIR/user_output.txt" # 程式的真實 stdout（拿來 diff）
-
-# ── 步驟 A：CMake Configure ───────────────────────────────────
-echo "[$(date '+%H:%M:%S')] === STEP A: CMake Configure ===" >> "$CONFIGURE_LOG"
-
-# 先確認 CMakeLists.txt 存在
-if [ ! -f "CMakeLists.txt" ]; then
-    echo "[ERROR] 找不到 CMakeLists.txt" >> "$CONFIGURE_LOG"
-    echo "SE"
-    exit 1
-fi
-
-mkdir -p build
-
-# 執行 cmake；stdout + stderr 都存進 configure.log
-cmake -G Ninja -B build >> "$CONFIGURE_LOG" 2>&1
-CMAKE_EXIT=$?
-
-if [ $CMAKE_EXIT -ne 0 ]; then
-    echo "[ERROR] cmake configure 失敗，exit code: $CMAKE_EXIT" >> "$CONFIGURE_LOG"
-    echo "SE"
-    exit 1
-fi
-
-echo "[OK] CMake configure 成功" >> "$CONFIGURE_LOG"
-
-# ── 步驟 B：Build ─────────────────────────────────────────────
-echo "[$(date '+%H:%M:%S')] === STEP B: Build ===" >> "$COMPILE_LOG"
-
-cmake --build build --verbose >> "$COMPILE_LOG" 2>&1
-BUILD_EXIT=$?
-
-if [ $BUILD_EXIT -ne 0 ]; then
-    echo "[ERROR] 編譯失敗，exit code: $BUILD_EXIT" >> "$COMPILE_LOG"
+if [ $? -ne 0 ]; then
     echo "CE"
     exit 1
 fi
 
-echo "[OK] 編譯成功" >> "$COMPILE_LOG"
+# ── run tests ─────────────────────────────
+for CASE_NAME in "${CASE_NAMES[@]}"; do
+    SCORE="${CASE_SCORES[$CASE_NAME]}"
+    EXEC="$BUILD_DIR/$CASE_NAME"
+    EXPECTED="$OJ_DIR/$CASE_NAME"
 
-# ── 確認執行檔存在 ────────────────────────────────────────────
-EXECUTABLE="./build/main"
-if [ ! -f "$EXECUTABLE" ]; then
-    # 嘗試找其他同名執行檔（Ninja 有時路徑不同）
-    EXECUTABLE=$(find ./build -maxdepth 2 -type f -perm /111 | head -n 1)
-    if [ -z "$EXECUTABLE" ]; then
-        echo "[ERROR] 找不到執行檔" >> "$COMPILE_LOG"
-        echo "CE"
-        exit 1
+    # find fallback
+    if [ ! -x "$EXEC" ]; then
+        EXEC=$(find "$BUILD_DIR" -type f -name "$CASE_NAME" -perm /111 2>/dev/null | head -n 1)
     fi
-fi
 
-# ── 步驟 C：Run ───────────────────────────────────────────────
-echo "[$(date '+%H:%M:%S')] === STEP C: Run (limit=${TIME_LIMIT}s) ===" >> "$OUTPUT_LOG"
+    if [ -z "$EXEC" ]; then
+        echo "$CASE_NAME 0/$SCORE (NO EXEC)" >> "$OUTPUT_LOG"
+        continue
+    fi
 
-# 程式 stdout → user_output.txt；stderr → output.log
-timeout "${TIME_LIMIT}s" "$EXECUTABLE" < "$INPUT_FILE" \
-    > "$USER_OUTPUT" 2>> "$OUTPUT_LOG"
-RUN_EXIT=$?
+    if [ ! -f "$EXPECTED" ]; then
+        echo "$CASE_NAME 0/$SCORE (NO EXPECTED)" >> "$OUTPUT_LOG"
+        continue
+    fi
 
-# exit code 124 = timeout 殺掉
-if [ $RUN_EXIT -eq 124 ]; then
-    echo "[ERROR] 執行超時（>${TIME_LIMIT}s）" >> "$OUTPUT_LOG"
-    echo "TLE"
-    exit 1
-fi
+    USER_OUT="$LOG_DIR/out_${CASE_NAME}.txt"
 
-# 其他非 0 = 程式自己 crash
-if [ $RUN_EXIT -ne 0 ]; then
-    echo "[ERROR] 程式異常結束，exit code: $RUN_EXIT" >> "$OUTPUT_LOG"
-    echo "RE"
-    exit 1
-fi
+    timeout "${TIME_LIMIT}s" "$EXEC" > "$USER_OUT" 2>>"$OUTPUT_LOG"
+    EXIT_CODE=$?
 
-echo "[OK] 程式執行完畢" >> "$OUTPUT_LOG"
+    # timeout / crash handling
+    if [ $EXIT_CODE -eq 124 ]; then
+        echo "$CASE_NAME 0/$SCORE (TLE)" >> "$OUTPUT_LOG"
+        continue
+    elif [ $EXIT_CODE -ge 128 ]; then
+        echo "$CASE_NAME 0/$SCORE (RE)" >> "$OUTPUT_LOG"
+        continue
+    elif [ $EXIT_CODE -ne 0 ]; then
+        echo "$CASE_NAME 0/$SCORE (RE)" >> "$OUTPUT_LOG"
+        continue
+    fi
 
-# ── 步驟 D：Judge（比對答案）────────────────────────────────
-echo "[$(date '+%H:%M:%S')] === STEP D: Judge ===" >> "$OUTPUT_LOG"
+    # compare
+    if diff -bB "$USER_OUT" "$EXPECTED" >/dev/null 2>&1; then
+        TOTAL_SCORE=$((TOTAL_SCORE + SCORE))
+        echo "$CASE_NAME $SCORE/$SCORE (AC)" >> "$OUTPUT_LOG"
+    else
+        echo "$CASE_NAME 0/$SCORE (WA)" >> "$OUTPUT_LOG"
+    fi
+done
 
-# diff：忽略結尾空白（-b）與結尾換行差異（-B），避免 Windows 換行誤判
-if diff -bB "$USER_OUTPUT" "$ANSWER_FILE" > /dev/null 2>&1; then
-    echo "[OK] 答案正確" >> "$OUTPUT_LOG"
-    echo "AC"
-    exit 0
-else
-    echo "[DIFF] 答案不符" >> "$OUTPUT_LOG"
-    # 把差異記進 output.log，方便學生 debug
-    echo "--- 你的輸出 vs 標準答案 ---" >> "$OUTPUT_LOG"
-    diff "$USER_OUTPUT" "$ANSWER_FILE" >> "$OUTPUT_LOG" 2>&1 || true
-    echo "WA"
-    exit 1
-fi
+rm -rf "$BUILD_DIR"
+
+echo "FINAL: $TOTAL_SCORE/$MAX_SCORE"
+exit 0

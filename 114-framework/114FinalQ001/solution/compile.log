@@ -1,0 +1,79 @@
+[07:34:11] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+[1/10] /usr/bin/c++  -I/data/114-framework/114FinalQ001/solution/build/case/_4_ -I/data/114-framework/114FinalQ001/solution -I/data/114-framework/114FinalQ001/solution/include -std=gnu++14 -MD -MT CMakeFiles/case4.dir/entrypoint.cpp.o -MF CMakeFiles/case4.dir/entrypoint.cpp.o.d -o CMakeFiles/case4.dir/entrypoint.cpp.o -c /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+[2/10] /usr/bin/c++  -I/data/114-framework/114FinalQ001/solution/build/case/_2_ -I/data/114-framework/114FinalQ001/solution -I/data/114-framework/114FinalQ001/solution/include -std=gnu++14 -MD -MT CMakeFiles/case2.dir/entrypoint.cpp.o -MF CMakeFiles/case2.dir/entrypoint.cpp.o.d -o CMakeFiles/case2.dir/entrypoint.cpp.o -c /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+[3/10] /usr/bin/c++  -I/data/114-framework/114FinalQ001/solution/build/case/_1_ -I/data/114-framework/114FinalQ001/solution -I/data/114-framework/114FinalQ001/solution/include -std=gnu++14 -MD -MT CMakeFiles/case1.dir/entrypoint.cpp.o -MF CMakeFiles/case1.dir/entrypoint.cpp.o.d -o CMakeFiles/case1.dir/entrypoint.cpp.o -c /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+[4/10] /usr/bin/c++  -I/data/114-framework/114FinalQ001/solution/build/case/_3_ -I/data/114-framework/114FinalQ001/solution -I/data/114-framework/114FinalQ001/solution/include -std=gnu++14 -MD -MT CMakeFiles/case3.dir/entrypoint.cpp.o -MF CMakeFiles/case3.dir/entrypoint.cpp.o.d -o CMakeFiles/case3.dir/entrypoint.cpp.o -c /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+[5/10] /usr/bin/c++  -I/data/114-framework/114FinalQ001/solution/build/case/_5_ -I/data/114-framework/114FinalQ001/solution -I/data/114-framework/114FinalQ001/solution/include -std=gnu++14 -MD -MT CMakeFiles/case5.dir/entrypoint.cpp.o -MF CMakeFiles/case5.dir/entrypoint.cpp.o.d -o CMakeFiles/case5.dir/entrypoint.cpp.o -c /data/114-framework/114FinalQ001/solution/entrypoint.cpp
+[6/10] : && /usr/bin/c++   CMakeFiles/case4.dir/entrypoint.cpp.o -o case4   && :
+[7/10] : && /usr/bin/c++   CMakeFiles/case2.dir/entrypoint.cpp.o -o case2   && :
+[8/10] : && /usr/bin/c++   CMakeFiles/case1.dir/entrypoint.cpp.o -o case1   && :
+[9/10] : && /usr/bin/c++   CMakeFiles/case3.dir/entrypoint.cpp.o -o case3   && :
+[10/10] : && /usr/bin/c++   CMakeFiles/case5.dir/entrypoint.cpp.o -o case5   && :
+
+[OK] 編譯成功
+[07:35:12] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:35:24] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:35:36] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:36:00] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:37:04] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:37:22] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:37:29] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:37:39] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功
+[07:38:10] === STEP B: Build ===
+Change Dir: '/data/114-framework/114FinalQ001/solution/build'
+
+Run Build Command(s): /usr/bin/ninja -v
+ninja: no work to do.
+
+[OK] 編譯成功

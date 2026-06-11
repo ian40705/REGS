@@ -1,0 +1,105 @@
+=== start judge ===
+cases: 5, max: 20
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Collect source files
+-- Add : /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp
+Create case1 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/online-judge/case1.h
+-- To /tmp/regs-build-WTgUOI/case/_1_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/include
+-- Generated target case1 using case1.h
+-- Added test target: case1
+Create case2 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/online-judge/case2.h
+-- To /tmp/regs-build-WTgUOI/case/_2_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/include
+-- Generated target case2 using case2.h
+-- Added test target: case2
+Create case3 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/online-judge/case3.h
+-- To /tmp/regs-build-WTgUOI/case/_3_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/include
+-- Generated target case3 using case3.h
+-- Added test target: case3
+Create case4 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/online-judge/case4.h
+-- To /tmp/regs-build-WTgUOI/case/_4_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/include
+-- Generated target case4 using case4.h
+-- Added test target: case4
+Create case5 Build Context
+-- Copy /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/online-judge/case5.h
+-- To /tmp/regs-build-WTgUOI/case/_5_/case.h
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution
+-- Add include: /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/include
+-- Generated target case5 using case5.h
+-- Added test target: case5
+All Secret:
+--  case1 '92fabc5e45a0641fdd8b3a3746d8caa1e9047deb26b56c8cd5cd57c8657ac670'
+--  case2 'e1a82858dfd170d8aff5dd59341b3fcfb566aeabf09ef711dfb0c41b2d252c7f'
+--  case3 '3f3dbe76cc49c2c54f8f7095b43fad3339092a40f949f8e286774224eef2e27b'
+--  case4 '40f4a4777310be150c89c5c82d67898981ef279190154e05bba9355700226952'
+--  case5 '23e6a243daa9fe6318c468234a40d23c39cb87925beeb3491d149dbbb8c4b116'
+-- Configuring done (1.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/regs-build-WTgUOI
+[1/10] Building CXX object CMakeFiles/case5.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp.o
+In file included from /tmp/regs-build-WTgUOI/case/_5_/case.h:6,
+                 from /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp:4:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h: In function ‘std::string debug(std::array<unsigned char, N>&)’:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h:31:1: warning: no return statement in function returning non-void [-Wreturn-type]
+   31 | }
+      | ^
+[2/10] Building CXX object CMakeFiles/case2.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp.o
+In file included from /tmp/regs-build-WTgUOI/case/_2_/case.h:6,
+                 from /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp:4:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h: In function ‘std::string debug(std::array<unsigned char, N>&)’:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h:31:1: warning: no return statement in function returning non-void [-Wreturn-type]
+   31 | }
+      | ^
+[3/10] Building CXX object CMakeFiles/case1.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp.o
+In file included from /tmp/regs-build-WTgUOI/case/_1_/case.h:6,
+                 from /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp:4:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h: In function ‘std::string debug(std::array<unsigned char, N>&)’:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h:31:1: warning: no return statement in function returning non-void [-Wreturn-type]
+   31 | }
+      | ^
+[4/10] Building CXX object CMakeFiles/case3.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp.o
+In file included from /tmp/regs-build-WTgUOI/case/_3_/case.h:6,
+                 from /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp:4:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h: In function ‘std::string debug(std::array<unsigned char, N>&)’:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h:31:1: warning: no return statement in function returning non-void [-Wreturn-type]
+   31 | }
+      | ^
+[5/10] Building CXX object CMakeFiles/case4.dir/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp.o
+In file included from /tmp/regs-build-WTgUOI/case/_4_/case.h:5,
+                 from /mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/entrypoint.cpp:4:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h: In function ‘std::string debug(std::array<unsigned char, N>&)’:
+/mnt/c/Users/USER/Desktop/114-framework/114FinalQ005/solution/to_base.h:31:1: warning: no return statement in function returning non-void [-Wreturn-type]
+   31 | }
+      | ^
+[6/10] Linking CXX executable case5
+[7/10] Linking CXX executable case2
+[8/10] Linking CXX executable case1
+[9/10] Linking CXX executable case3
+[10/10] Linking CXX executable case4
+case1 2/2 (AC)
+case2 2/2 (AC)
+case3 4/4 (AC)
+case4 4/4 (AC)
+case5 8/8 (AC)

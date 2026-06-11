@@ -21,169 +21,195 @@ import (
 // StartJudge dispatches to the correct judge pipeline based on problem.JudgeType.
 //
 // JudgeTypeStdio   → judge.sh  <student_dir> <input.txt> <answer.txt> <timelimit>
-// JudgeTypeCatch2  → judge_catch2.sh <student_dir> <template_dir> <scores_file> <timelimit>
+// JudgeTypeCatch2  → judge.sh  <student_dir> <problem_dir> "catch2" <timelimit>
 func StartJudge(operatorID string, zipPath string, problemID uint, timeLimitSec int) {
+	timeLimitSec = 30
+
 	var problem model.Problem
 	if err := db.Get().First(&problem, problemID).Error; err != nil {
-		fmt.Printf("[Judge] load problem error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
 	}
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
-		fmt.Printf("[Judge] docker client error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
 	}
 
-	// 解壓學生上傳的 zip 至 workspace
-	workspace := filepath.Join(os.TempDir(), "regs-judge-"+operatorID)
-	_ = os.RemoveAll(workspace)
-	if err := os.MkdirAll(workspace, 0o755); err != nil {
-		fmt.Printf("[Judge] mkdir workspace error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
-		return
-	}
-	if err := unzipTo(zipPath, workspace); err != nil {
-		fmt.Printf("[Judge] unzip error: %v\n", err)
-	}
-
-	// 取得題目測資目錄（TestcasePath 指向 problem 資料夾，含 template/ 與 online-judge/）
 	problemDir, err := resolveProblemDir(problem)
 	if err != nil {
-		fmt.Printf("[Judge] problem dir resolve error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
+	}
+
+	workspace := filepath.Join(filepath.Dir(problemDir), "workspace-"+operatorID)
+	_ = os.RemoveAll(workspace)
+	_ = os.MkdirAll(workspace, 0o755)
+
+	_ = unzipTo(zipPath, workspace)
+
+	hostProjectPath := os.Getenv("HOST_PROJECT_PATH")
+
+	var hostWorkspacePath, hostProblemDirPath string
+
+	if hostProjectPath != "" {
+		relWorkspace, _ := filepath.Rel("/app", workspace)
+		relProblem, _ := filepath.Rel("/app", problemDir)
+
+		hostWorkspacePath = filepath.Join(hostProjectPath, relWorkspace)
+		hostProblemDirPath = filepath.Join(hostProjectPath, relProblem)
+	} else {
+		hostWorkspacePath = workspace
+		hostProblemDirPath = problemDir
 	}
 
 	var binds []string
 	var cmd []string
 
+	// mode fix
+	mode := "catch2"
+	if problem.JudgeType == model.JudgeTypeCMake {
+		mode = "cmake"
+	}
+
 	switch problem.JudgeType {
-	case model.JudgeTypeCatch2:
-		// 掛載：
-		//   /studentcode  ← 學生上傳的原始碼目錄
-		//   /problem      ← 題目目錄（含 template/ spec/ online-judge/ scores.txt）
-		scoresFile := filepath.Join(problemDir, "scores.txt")
-		if _, err := os.Stat(scoresFile); err != nil {
-			fmt.Printf("[Judge] scores.txt not found at %s\n", scoresFile)
-			_ = updateSubmissionStatus(operatorID, "SE")
-			return
-		}
+	case model.JudgeTypeCatch2, model.JudgeTypeCMake:
 		binds = []string{
-			workspace + ":/studentcode",
-			problemDir + ":/problem:ro",
+			hostWorkspacePath + ":/studentcode",
+			hostProblemDirPath + ":/problem:ro",
 		}
+
 		cmd = []string{
-			"bash", "/workspace/judge_catch2.sh",
-			"/studentcode",          // STUDENT_DIR
-			"/problem/template",     // TEMPLATE_DIR
-			"/problem/scores.txt",   // SCORES_FILE
+			"/studentcode",
+			"/problem",
+			mode,
 			fmt.Sprintf("%d", timeLimitSec),
 		}
 
-	default: // JudgeTypeStdio
-		inputPath := filepath.Join(problemDir, "input.txt")
-		answerPath := filepath.Join(problemDir, "answer.txt")
+	default:
 		binds = []string{
-			workspace + ":/studentcode",
-			problemDir + ":/testdata:ro",
+			hostWorkspacePath + ":/studentcode",
+			hostProblemDirPath + ":/testdata:ro",
 		}
+
 		cmd = []string{
-			"bash", "/workspace/judge.sh",
 			"/studentcode",
 			"/testdata/input.txt",
 			"/testdata/answer.txt",
 			fmt.Sprintf("%d", timeLimitSec),
 		}
-		_ = inputPath
-		_ = answerPath
 	}
 
 	hostCfg := &container.HostConfig{
 		NetworkMode: "none",
 		Binds:       binds,
 		Resources: container.Resources{
-			NanoCPUs: 1_000_000_000, // 1 CPU
-			Memory:   512 * 1024 * 1024, // 512 MB
+			NanoCPUs: 1_000_000_000,
+			Memory:   1024 * 1024 * 1024,
 		},
 	}
 
-	stopTimeout := timeLimitSec + 10
 	resp, err := cli.ContainerCreate(
 		context.Background(),
 		&container.Config{
 			Image:      "regs-judge:latest",
 			WorkingDir: "/studentcode",
+			Entrypoint: []string{"/workspace/judge.sh"},
 			Cmd:        cmd,
 		},
 		hostCfg, nil, nil, "",
 	)
+
 	if err != nil {
-		fmt.Printf("[Judge] container create error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
 	}
 
 	if err := cli.ContainerStart(context.Background(), resp.ID, container.StartOptions{}); err != nil {
-		fmt.Printf("[Judge] container start error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
 	}
 
-	fmt.Printf("[Judge] started: problem=%d type=%s timeout=%ds\n",
-		problemID, problem.JudgeType, timeLimitSec)
+	go waitAndCollect(cli, resp.ID, operatorID, problem, timeLimitSec, timeLimitSec+10)
+}
 
-	go waitAndCollect(cli, resp.ID, operatorID, problem, timeLimitSec, stopTimeout)
+func resolveJudgeInputAnswerPaths(problemID uint) (string, string, error) {
+	var problem model.Problem
+	if err := db.Get().First(&problem, problemID).Error; err != nil {
+		return "", "", fmt.Errorf("load problem %d: %w", problemID, err)
+	}
+	if strings.TrimSpace(problem.TestcasePath) == "" {
+		return "", "", fmt.Errorf("problem %d has no testcase path", problemID)
+	}
+	dir, err := resolveProblemDir(problem)
+	if err != nil {
+		return "", "", err
+	}
+	return filepath.Join(dir, "input.txt"), filepath.Join(dir, "answer.txt"), nil
 }
 
 // waitAndCollect waits for container exit then parses its stdout to update DB.
-func waitAndCollect(cli *client.Client, containerID string, operatorID string,
-	problem model.Problem, timeLimitSec int, stopTimeout int) {
-
-	waitCh, errCh := cli.ContainerWait(context.Background(), containerID,
-		container.WaitConditionNotRunning)
+func waitAndCollect(
+	cli *client.Client,
+	containerID string,
+	operatorID string,
+	problem model.Problem,
+	timeLimitSec int,
+	stopTimeout int,
+) {
+	waitCh, errCh := cli.ContainerWait(
+		context.Background(),
+		containerID,
+		container.WaitConditionNotRunning,
+	)
 
 	deadline := time.After(time.Duration(timeLimitSec+stopTimeout) * time.Second)
 
 	select {
 	case <-waitCh:
-		// 正常結束
+
 	case <-errCh:
-		// 等待出錯，嘗試強制停止
-		t := stopTimeout
-		_ = cli.ContainerStop(context.Background(), containerID, container.StopOptions{Timeout: &t})
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
+
 	case <-deadline:
-		// 超過整體上限 → TLE
 		t := stopTimeout
 		_ = cli.ContainerStop(context.Background(), containerID, container.StopOptions{Timeout: &t})
-		_ = updateSubmissionStatus(operatorID, "TLE")
+		updateSubmissionStatus(operatorID, "TLE")
 		return
 	}
 
-	// 讀 container stdout（judge script 的輸出）
-	logs, err := cli.ContainerLogs(context.Background(), containerID,
-		container.LogsOptions{ShowStdout: true, ShowStderr: false})
+	logs, err := cli.ContainerLogs(
+		context.Background(),
+		containerID,
+		container.LogsOptions{
+			ShowStdout: true,
+			ShowStderr: true, // 🔥 FIX
+		},
+	)
+
 	if err != nil {
-		fmt.Printf("[Judge] read logs error: %v\n", err)
-		_ = updateSubmissionStatus(operatorID, "SE")
+		updateSubmissionStatus(operatorID, "SE")
 		return
 	}
 	defer logs.Close()
 
 	raw, _ := io.ReadAll(logs)
-	// Docker log stream 前 8 bytes 是 header（stream type + length），需要跳過
 	output := stripDockerLogHeader(raw)
+
 	lines := strings.Split(strings.TrimSpace(output), "\n")
-	lastLine := strings.TrimSpace(lines[len(lines)-1])
+
+	if len(lines) == 0 || (len(lines) == 1 && lines[0] == "") {
+		updateSubmissionStatus(operatorID, "SE")
+		return
+	}
+
+	lastLine := strings.ToUpper(strings.TrimSpace(lines[len(lines)-1]))
 
 	parseAndSave(operatorID, lastLine, problem)
 }
 
-// stripDockerLogHeader 移除 Docker multiplexed log stream 的 8-byte header。
 func stripDockerLogHeader(raw []byte) string {
 	var sb strings.Builder
 	for len(raw) >= 8 {
@@ -198,44 +224,45 @@ func stripDockerLogHeader(raw []byte) string {
 	return sb.String()
 }
 
-// parseAndSave interprets the last line of judge output and updates DB.
 func parseAndSave(operatorID string, lastLine string, problem model.Problem) {
-	if strings.HasPrefix(lastLine, "SCORED ") {
-		// Catch2 模式：SCORED X/Y
-		parts := strings.TrimPrefix(lastLine, "SCORED ")
+	valid := map[string]bool{
+		"AC": true,
+		"WA": true,
+		"CE": true,
+		"RE": true,
+		"SE": true,
+		"TLE": true,
+	}
+
+	if strings.HasPrefix(lastLine, "FINAL:") {
+		parts := strings.TrimPrefix(lastLine, "FINAL:")
 		halves := strings.SplitN(parts, "/", 2)
-		got, _ := strconv.Atoi(halves[0])
+
+		got, _ := strconv.Atoi(strings.TrimSpace(halves[0]))
 		maxScore := problem.MaxScore
+
 		if len(halves) == 2 {
-			if parsed, err := strconv.Atoi(halves[1]); err == nil {
-				maxScore = parsed
+			if v, err := strconv.Atoi(strings.TrimSpace(halves[1])); err == nil {
+				maxScore = v
 			}
 		}
 
 		status := "WA"
 		if maxScore > 0 && got >= maxScore {
 			status = "AC"
-		} else if got > 0 {
-			status = "PA" // Partial Accept
 		}
-		_ = updateSubmissionScore(operatorID, status, got)
-		fmt.Printf("[Judge] %s → %s (%d/%d)\n", operatorID, status, got, maxScore)
+
+		updateSubmissionScore(operatorID, status, got)
 		return
 	}
 
-	// Stdio 模式：AC / WA / CE / RE / SE / TLE
-	valid := map[string]bool{"AC": true, "WA": true, "CE": true, "RE": true, "SE": true, "TLE": true}
 	if !valid[lastLine] {
-		lastLine = "SE"
+		lastLine = "RE"
 	}
-	_ = updateSubmissionStatus(operatorID, lastLine)
-	fmt.Printf("[Judge] %s → %s\n", operatorID, lastLine)
+
+	updateSubmissionStatus(operatorID, lastLine)
 }
 
-// resolveProblemDir returns the local path to the problem directory.
-// TestcasePath can be:
-//   - A directory path  (e.g. /srv/problems/114FinalQ006)
-//   - A zip path        (extracted to temp, then returned)
 func resolveProblemDir(problem model.Problem) (string, error) {
 	if strings.TrimSpace(problem.TestcasePath) == "" {
 		return "", fmt.Errorf("problem %d has no testcase_path", problem.ID)

@@ -31,6 +31,8 @@ const (
 	JudgeTypeStdio JudgeType = "stdio"
 	// JudgeTypeCatch2：Catch2 多測資模式（新增，用於 114Final 題目）
 	JudgeTypeCatch2 JudgeType = "catch2"
+	// JudgeTypeCMake：CMake pipeline 模式（catch2 的別名，相容 test_all.sh）
+	JudgeTypeCMake JudgeType = "cmake"
 )
 
 type Problem struct {

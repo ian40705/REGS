@@ -62,6 +62,7 @@ func main() {
 	apiGroup.POST("/submissions", middleware.JWTAuth(), middleware.RequirePermission(middleware.PermSubmit), api.Submit)                              // User: submit code
 	apiGroup.GET("/submissions", middleware.JWTAuth(), middleware.RequirePermission(middleware.PermView), api.ListSubmissions)                        // User: list own submissions
 	apiGroup.GET("/submissions/:operatorId/source", middleware.JWTAuth(), middleware.RequirePermission(middleware.PermView), api.GetSubmissionSource) // User: download submission source
+	apiGroup.GET("/submissions/:operatorId/logs", middleware.JWTAuth(), middleware.RequirePermission(middleware.PermView), api.GetSubmissionLogs)     // User: get submission logs
 	apiGroup.GET("/submissions/:operatorId", middleware.JWTAuth(), middleware.RequirePermission(middleware.PermView), api.GetSubmission)              // User: get submission result
 
 	// Statistics endpoints

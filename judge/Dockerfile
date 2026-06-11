@@ -16,9 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /workspace
 
 COPY judge.sh /workspace/judge.sh
-COPY judge_catch2.sh /workspace/judge_catch2.sh
 
-RUN dos2unix /workspace/judge.sh /workspace/judge_catch2.sh \
-    && chmod +x /workspace/judge.sh /workspace/judge_catch2.sh
+RUN dos2unix /workspace/judge.sh \
+    && chmod +x /workspace/judge.sh
 
 ENTRYPOINT ["bash"]

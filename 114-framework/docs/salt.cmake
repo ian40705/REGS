@@ -1,0 +1,5 @@
+if(NOT DEFINED SALT)
+  set(SALT "+sjZbP3katGcOoT4NHUJ")
+endif()
+file(READ "${SPEC_SRC}" FILE_CONTENT)
+string(SHA256 SECRET "${SALT}${FILE_CONTENT}")
